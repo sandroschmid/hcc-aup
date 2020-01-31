@@ -19,20 +19,21 @@ public enum Export {
     return fileExtension;
   }
   
-  public void export(final String outDirPath, final Cluster cluster) throws IOException {
+  public void export(final String outDirPath, final String fileNamePrefix, final Cluster cluster) throws IOException {
     final String content;
     if (Latex.equals(this)) {
       content = cluster.asLatexTable();
     } else {
       content = cluster.asCsv();
     }
-    
-    final File outDir = new File(outDirPath);
+  
+    final File outDir = new File(outDirPath, fileExtension);
     if (!outDir.exists()) {
       outDir.mkdirs();
     }
-    
-    final File outFile = new File(outDir, String.format("cluster-k%d.%s", cluster.k(), fileExtension));
+  
+    final String fileName = String.format("%s_cluster-k%d.%s", fileNamePrefix, cluster.k(), fileExtension);
+    final File outFile = new File(outDir, fileName);
     try (final Writer writer = new FileWriter(outFile, false)) {
       writer.write(content);
     }

@@ -25,19 +25,19 @@ public class WekaApplication {
   public static void main(final String[] args) throws Exception {
     final File fileAggr = new File(DATA_DIR, FILE_AGGR);
     final File fileExtended = new File(DATA_DIR, FILE_EXTENDED);
-    
+  
     final Instances dataAggr = getData(fileAggr);
     final Instances dataExtended = getData(fileExtended);
-    
-    process(dataAggr, String.format("%s/aggr/full", OUT_DIR));
-    process(dataExtended, String.format("%s/extended/full", OUT_DIR));
-    
+  
+    process(dataAggr, OUT_DIR, "aggr-full");
+    process(dataExtended, OUT_DIR, "extended-full");
+  
     final Instances dataAggrNoStats = removeStatistics(dataAggr);
     final Instances dataExtendedNoStats = removeStatistics(dataExtended);
-    
-    process(dataAggrNoStats, String.format("%s/aggr/no-stat", OUT_DIR));
-    process(dataExtendedNoStats, String.format("%s/extended/no-stat", OUT_DIR));
-    
+  
+    process(dataAggrNoStats, OUT_DIR, "aggr-no-stat");
+    process(dataExtendedNoStats, OUT_DIR, "extended-no-stat");
+  
     final Set<String> aggrBlacklist = new HashSet<>();
 //    aggrBlacklist.add("TRANS_PROB_0_0"); // richtig - richtig
 //    aggrBlacklist.add("TRANS_PROB_0_1"); // richtig - falsch
@@ -115,12 +115,12 @@ public class WekaApplication {
     extendedBlacklist.add("TRANS_PROB_6_4"); // fertig - hilfe 3
     extendedBlacklist.add("TRANS_PROB_6_5"); // fertig - hilfe 4
     extendedBlacklist.add("TRANS_PROB_6_6"); // fertig - fertig
-    
+  
     final Instances dataAggrFinal = remove(dataAggr, aggrBlacklist);
     final Instances dataExtendedFinal = remove(dataExtended, extendedBlacklist);
-    
-    process(dataAggrFinal, String.format("%s/aggr/final", OUT_DIR));
-    process(dataExtendedFinal, String.format("%s/extended/final", OUT_DIR));
+  
+    process(dataAggrFinal, OUT_DIR, "aggr-final");
+    process(dataExtendedFinal, OUT_DIR, "extended-final");
   }
   
   private static Instances getData(final File file) throws Exception {
@@ -156,12 +156,12 @@ public class WekaApplication {
     return data;
   }
   
-  private static void process(final Instances data, final String outDir) throws Exception {
+  private static void process(final Instances data, final String outDir, final String fileNamePrefix) throws Exception {
     for (int k = MIN_K; k <= MAX_K; k++) {
       final Cluster cluster = new Cluster(k, MAX_ITERATIONS);
       cluster.cluster(data);
-      Export.Csv.export(outDir, cluster);
-      Export.Latex.export(outDir, cluster);
+      Export.Csv.export(outDir, fileNamePrefix, cluster);
+      Export.Latex.export(outDir, fileNamePrefix, cluster);
     }
   }
   
