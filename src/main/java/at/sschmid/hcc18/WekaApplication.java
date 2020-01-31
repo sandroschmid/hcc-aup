@@ -39,29 +39,29 @@ public class WekaApplication {
     process(dataExtendedNoStats, OUT_DIR, "extended-no-stat");
   
     final Set<String> aggrBlacklist = new HashSet<>();
-//    aggrBlacklist.add("TRANS_PROB_0_0"); // richtig - richtig
-//    aggrBlacklist.add("TRANS_PROB_0_1"); // richtig - falsch
+    aggrBlacklist.add("TRANS_PROB_0_0"); // richtig - richtig
+    aggrBlacklist.add("TRANS_PROB_0_1"); // richtig - falsch
     aggrBlacklist.add("TRANS_PROB_0_2"); // richtig - hilfe
 //    aggrBlacklist.add("TRANS_PROB_0_3"); // richtig - fertig
 
 //    aggrBlacklist.add("TRANS_PROB_1_0"); // falsch - richtig
 //    aggrBlacklist.add("TRANS_PROB_1_1"); // falsch - falsch
 //    aggrBlacklist.add("TRANS_PROB_1_2"); // falsch - hilfe
-    aggrBlacklist.add("TRANS_PROB_1_3"); // falsch - fertig
+//    aggrBlacklist.add("TRANS_PROB_1_3"); // falsch - fertig
 
 //    aggrBlacklist.add("TRANS_PROB_2_0"); // hilfe - richtig
 //    aggrBlacklist.add("TRANS_PROB_2_1"); // hilfe - falsch
 //    aggrBlacklist.add("TRANS_PROB_2_2"); // hilfe - hilfe
-    aggrBlacklist.add("TRANS_PROB_2_3"); // hilfe - fertig
-    
+//    aggrBlacklist.add("TRANS_PROB_2_3"); // hilfe - fertig
+  
     aggrBlacklist.add("TRANS_PROB_3_0"); // fertig - richtig
     aggrBlacklist.add("TRANS_PROB_3_1"); // fertig - falsch
     aggrBlacklist.add("TRANS_PROB_3_2"); // fertig - hilfe
     aggrBlacklist.add("TRANS_PROB_3_3"); // fertig - fertig
-    
+  
     final Set<String> extendedBlacklist = new HashSet<>();
-//    extendedBlacklist.add("TRANS_PROB_0_0"); // richtig - richtig
-//    extendedBlacklist.add("TRANS_PROB_0_1"); // richtig - falsch
+    extendedBlacklist.add("TRANS_PROB_0_0"); // richtig - richtig
+    extendedBlacklist.add("TRANS_PROB_0_1"); // richtig - falsch
     extendedBlacklist.add("TRANS_PROB_0_2"); // richtig - hilfe 1
     extendedBlacklist.add("TRANS_PROB_0_3"); // richtig - hilfe 2
     extendedBlacklist.add("TRANS_PROB_0_4"); // richtig - hilfe 3
@@ -74,7 +74,7 @@ public class WekaApplication {
 //    extendedBlacklist.add("TRANS_PROB_1_3"); // falsch - hilfe 2
 //    extendedBlacklist.add("TRANS_PROB_1_4"); // falsch - hilfe 3
 //    extendedBlacklist.add("TRANS_PROB_1_5"); // falsch - hilfe 4
-    extendedBlacklist.add("TRANS_PROB_1_6"); // falsch - fertig
+//    extendedBlacklist.add("TRANS_PROB_1_6"); // falsch - fertig
 
 //    extendedBlacklist.add("TRANS_PROB_2_0"); // hilfe 1 - richtig
 //    extendedBlacklist.add("TRANS_PROB_2_1"); // hilfe 1 - falsch
@@ -82,7 +82,7 @@ public class WekaApplication {
 //    extendedBlacklist.add("TRANS_PROB_2_3"); // hilfe 1 - hilfe 2
 //    extendedBlacklist.add("TRANS_PROB_2_4"); // hilfe 1 - hilfe 3
 //    extendedBlacklist.add("TRANS_PROB_2_5"); // hilfe 1 - hilfe 4
-    extendedBlacklist.add("TRANS_PROB_2_6"); // hilfe 1 - fertig
+//    extendedBlacklist.add("TRANS_PROB_2_6"); // hilfe 1 - fertig
 
 //    extendedBlacklist.add("TRANS_PROB_3_0"); // hilfe 2 - richtig
 //    extendedBlacklist.add("TRANS_PROB_3_1"); // hilfe 2 - falsch
@@ -90,7 +90,7 @@ public class WekaApplication {
     extendedBlacklist.add("TRANS_PROB_3_3"); // hilfe 2 - hilfe 2
 //    extendedBlacklist.add("TRANS_PROB_3_4"); // hilfe 2 - hilfe 3
 //    extendedBlacklist.add("TRANS_PROB_3_5"); // hilfe 2 - hilfe 4
-    extendedBlacklist.add("TRANS_PROB_3_6"); // hilfe 2 - fertig
+//    extendedBlacklist.add("TRANS_PROB_3_6"); // hilfe 2 - fertig
 
 //    extendedBlacklist.add("TRANS_PROB_4_0"); // hilfe 3 - richtig
 //    extendedBlacklist.add("TRANS_PROB_4_1"); // hilfe 3 - falsch
@@ -98,7 +98,7 @@ public class WekaApplication {
 //    extendedBlacklist.add("TRANS_PROB_4_3"); // hilfe 3 - hilfe 2
     extendedBlacklist.add("TRANS_PROB_4_4"); // hilfe 3 - hilfe 3
 //    extendedBlacklist.add("TRANS_PROB_4_5"); // hilfe 3 - hilfe 4
-    extendedBlacklist.add("TRANS_PROB_4_6"); // hilfe 3 - fertig
+//    extendedBlacklist.add("TRANS_PROB_4_6"); // hilfe 3 - fertig
 
 //    extendedBlacklist.add("TRANS_PROB_5_0"); // hilfe 4 - richtig
 //    extendedBlacklist.add("TRANS_PROB_5_1"); // hilfe 4 - falsch
@@ -106,7 +106,7 @@ public class WekaApplication {
 //    extendedBlacklist.add("TRANS_PROB_5_3"); // hilfe 4 - hilfe 2
 //    extendedBlacklist.add("TRANS_PROB_5_4"); // hilfe 4 - hilfe 3
     extendedBlacklist.add("TRANS_PROB_5_5"); // hilfe 4 - hilfe 4
-    extendedBlacklist.add("TRANS_PROB_5_6"); // hilfe 4 - fertig
+//    extendedBlacklist.add("TRANS_PROB_5_6"); // hilfe 4 - fertig
     
     extendedBlacklist.add("TRANS_PROB_6_0"); // fertig - richtig
     extendedBlacklist.add("TRANS_PROB_6_1"); // fertig - falsch
