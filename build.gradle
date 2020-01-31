@@ -12,14 +12,7 @@ repositories {
 }
 
 dependencies {
-    compile files('lib/javaml-0.1.7.jar');
-    // compile files('lib/weka.jar');
-
-
-    compile 'nz.ac.waikato.cms.weka:weka-stable:3.6.9'
-//    <groupId>nz.ac.waikato.cms.weka</groupId>
-//            <artifactId>weka-stable</artifactId>
-//            <version>3.6.9</version>
+    compile group: 'nz.ac.waikato.cms.weka', name: 'weka-stable', version: '3.6.9'
 
     compile group: 'org.slf4j', name: 'slf4j-simple', version: '1.6.1'
 
