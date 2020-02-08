@@ -1,4 +1,4 @@
-package at.sschmid.hcc18;
+package at.sschmid.hcc18.model;
 
 import weka.clusterers.SimpleKMeans;
 import weka.core.Attribute;

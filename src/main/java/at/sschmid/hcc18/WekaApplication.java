@@ -1,6 +1,7 @@
 package at.sschmid.hcc18;
 
 import at.sschmid.hcc18.export.Exports;
+import at.sschmid.hcc18.model.Cluster;
 import lombok.extern.slf4j.Slf4j;
 import weka.core.Attribute;
 import weka.core.Instances;

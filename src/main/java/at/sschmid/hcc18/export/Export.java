@@ -1,22 +1,20 @@
 package at.sschmid.hcc18.export;
 
-import at.sschmid.hcc18.Cluster;
+import at.sschmid.hcc18.model.Cluster;
+import lombok.Getter;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 
+@Getter
 public abstract class Export {
 
   private final String fileExtension;
 
   Export(final String fileExtension) {
     this.fileExtension = fileExtension;
-  }
-
-  public String getFileExtension() {
-    return fileExtension;
   }
 
   public void export(final String outDirPath, final String fileNamePrefix, final Cluster cluster) throws IOException {

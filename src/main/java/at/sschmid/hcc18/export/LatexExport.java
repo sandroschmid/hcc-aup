@@ -1,8 +1,8 @@
 package at.sschmid.hcc18.export;
 
-import at.sschmid.hcc18.Cluster;
+import at.sschmid.hcc18.model.Cluster;
 
-class LatexExport extends Export {
+final class LatexExport extends Export {
 
   LatexExport() {
     super("tex");
