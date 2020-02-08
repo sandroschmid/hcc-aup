@@ -1,5 +1,6 @@
 package at.sschmid.hcc18;
 
+import at.sschmid.hcc18.export.Exports;
 import lombok.extern.slf4j.Slf4j;
 import weka.core.Attribute;
 import weka.core.Instances;
@@ -13,7 +14,7 @@ import java.util.Set;
 
 @Slf4j
 public class WekaApplication {
-  
+
   private static final String DATA_DIR = "files/data";
   private static final String OUT_DIR = "files/out";
   private static final String FILE_AGGR = "pslc_aggregated.arff";
@@ -21,23 +22,23 @@ public class WekaApplication {
   private static final int MIN_K = 2;
   private static final int MAX_K = 8;
   private static final int MAX_ITERATIONS = 500;
-  
+
   public static void main(final String[] args) throws Exception {
     final File fileAggr = new File(DATA_DIR, FILE_AGGR);
     final File fileExtended = new File(DATA_DIR, FILE_EXTENDED);
-  
+
     final Instances dataAggr = getData(fileAggr);
     final Instances dataExtended = getData(fileExtended);
-  
+
     process(dataAggr, OUT_DIR, "aggr-full");
     process(dataExtended, OUT_DIR, "extended-full");
-  
+
     final Instances dataAggrNoStats = removeStatistics(dataAggr);
     final Instances dataExtendedNoStats = removeStatistics(dataExtended);
-  
+
     process(dataAggrNoStats, OUT_DIR, "aggr-no-stat");
     process(dataExtendedNoStats, OUT_DIR, "extended-no-stat");
-  
+
     final Set<String> aggrBlacklist = new HashSet<>();
     aggrBlacklist.add("TRANS_PROB_0_0"); // richtig - richtig
     aggrBlacklist.add("TRANS_PROB_0_1"); // richtig - falsch
@@ -53,12 +54,12 @@ public class WekaApplication {
 //    aggrBlacklist.add("TRANS_PROB_2_1"); // hilfe - falsch
 //    aggrBlacklist.add("TRANS_PROB_2_2"); // hilfe - hilfe
 //    aggrBlacklist.add("TRANS_PROB_2_3"); // hilfe - fertig
-  
+
     aggrBlacklist.add("TRANS_PROB_3_0"); // fertig - richtig
     aggrBlacklist.add("TRANS_PROB_3_1"); // fertig - falsch
     aggrBlacklist.add("TRANS_PROB_3_2"); // fertig - hilfe
     aggrBlacklist.add("TRANS_PROB_3_3"); // fertig - fertig
-  
+
     final Set<String> extendedBlacklist = new HashSet<>();
     extendedBlacklist.add("TRANS_PROB_0_0"); // richtig - richtig
     extendedBlacklist.add("TRANS_PROB_0_1"); // richtig - falsch
@@ -107,7 +108,7 @@ public class WekaApplication {
 //    extendedBlacklist.add("TRANS_PROB_5_4"); // hilfe 4 - hilfe 3
     extendedBlacklist.add("TRANS_PROB_5_5"); // hilfe 4 - hilfe 4
 //    extendedBlacklist.add("TRANS_PROB_5_6"); // hilfe 4 - fertig
-    
+
     extendedBlacklist.add("TRANS_PROB_6_0"); // fertig - richtig
     extendedBlacklist.add("TRANS_PROB_6_1"); // fertig - falsch
     extendedBlacklist.add("TRANS_PROB_6_2"); // fertig - hilfe 1
@@ -115,20 +116,20 @@ public class WekaApplication {
     extendedBlacklist.add("TRANS_PROB_6_4"); // fertig - hilfe 3
     extendedBlacklist.add("TRANS_PROB_6_5"); // fertig - hilfe 4
     extendedBlacklist.add("TRANS_PROB_6_6"); // fertig - fertig
-  
+
     final Instances dataAggrFinal = remove(dataAggr, aggrBlacklist);
     final Instances dataExtendedFinal = remove(dataExtended, extendedBlacklist);
-  
+
     process(dataAggrFinal, OUT_DIR, "aggr-final");
     process(dataExtendedFinal, OUT_DIR, "extended-final");
   }
-  
+
   private static Instances getData(final File file) throws Exception {
     final Loader loader = new ArffLoader();
     loader.setSource(file);
     return loader.getDataSet();
   }
-  
+
   private static Instances removeStatistics(final Instances data) {
     final Enumeration<Attribute> attributesIt = data.enumerateAttributes();
     int deletedAttributes = 0;
@@ -139,10 +140,10 @@ public class WekaApplication {
         data.deleteAttributeAt(attribute.index() - deletedAttributes++);
       }
     }
-    
+
     return data;
   }
-  
+
   private static Instances remove(final Instances data, final Set<String> blacklist) {
     final Enumeration<Attribute> attributesIt = data.enumerateAttributes();
     int deletedAttributes = 0;
@@ -152,17 +153,17 @@ public class WekaApplication {
         data.deleteAttributeAt(attribute.index() - deletedAttributes++);
       }
     }
-    
+
     return data;
   }
-  
+
   private static void process(final Instances data, final String outDir, final String fileNamePrefix) throws Exception {
     for (int k = MIN_K; k <= MAX_K; k++) {
       final Cluster cluster = new Cluster(k, MAX_ITERATIONS);
       cluster.cluster(data);
-      Export.Csv.export(outDir, fileNamePrefix, cluster);
-      Export.Latex.export(outDir, fileNamePrefix, cluster);
+      Exports.Csv.export(outDir, fileNamePrefix, cluster);
+      Exports.Latex.export(outDir, fileNamePrefix, cluster);
     }
   }
-  
+
 }
