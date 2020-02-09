@@ -1,6 +1,5 @@
 package at.sschmid.hcc18.model;
 
-import lombok.Getter;
 import weka.clusterers.SimpleKMeans;
 import weka.core.Attribute;
 import weka.core.EuclideanDistance;
@@ -21,7 +20,6 @@ public class Cluster {
     DECIMAL_FORMAT.setMaximumFractionDigits(6);
   }
 
-  @Getter
   private final int k;
   private final SimpleKMeans kMeans;
 
@@ -39,6 +37,10 @@ public class Cluster {
     kMeans.setMaxIterations(maxIterations);
     kMeans.setPreserveInstancesOrder(true);
     return kMeans;
+  }
+
+  public int k() {
+    return k;
   }
 
   public void cluster(final Instances data) throws Exception {
